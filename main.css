@@ -1,0 +1,39 @@
+body{
+  padding-top: 40px;
+}
+
+#link{
+    color: #808080;
+}
+
+.input-group{
+  width: 570px;
+  height: 45px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.card{
+  width: 450px;
+  display: inline-block;
+  height: 45px;
+  margin-bottom: 10px;
+  margin-left: 170px;
+}
+
+.card-body{
+  padding: 10px 10px;
+}
+
+.btn.btn-outline-success{
+  display: inline-block;
+  height: 45px;
+}
+
+.form-control{
+  width: 50px;
+  height: 45px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
