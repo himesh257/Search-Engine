@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search here.." aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input id="search" type="text" class="form-control" placeholder="Search here.." aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" id="pdf" type="button">PDF</button>
                 <button class="btn btn-outline-secondary" id="url" type="button">URL</button>
@@ -24,7 +24,7 @@
             {%for i in range(0, c)%}
             <div class="card">
                 <div class="card-body">
-                    <a id="link" href={{url}} target="_blank"><span>{{ results[i] }}</span></a>
+                    <a id=link{{i}} href={{url[i]}} target="_blank"><span>{{ results[i] }}</span></a>
                 </div>
             </div>
             
@@ -36,9 +36,8 @@
             for(var i = 0; i<btns.length; i+=1)(function(i){
                 $(function(){
                   $('#addBtn'+i).click(function(e){
-                     
                       $.getJSON($SCRIPT_ROOT + '/final', {
-                          a: document.getElementById('link').href
+                          a: document.getElementById('link'+i).href
                       }, function(d){
                         alert(d)
                       });
@@ -46,6 +45,30 @@
                   });   
                 })
              })(i)
+             
+             $(function(){
+                  $('#pdf').click(function(e){
+                      $.getJSON($SCRIPT_ROOT + '/pdf', {
+                          a: document.getElementById('search').value
+                      }, function(d){
+                        alert(d)
+                      });
+                      return false;
+                  });   
+                })
+                
+             $(function(){
+                  $('#url').click(function(e){
+                      $.getJSON($SCRIPT_ROOT + '/url', {
+                          a: document.getElementById('search').value
+                      }, function(d){
+                        alert(d)
+                      });
+                      return false;
+                  });   
+                })
+             
+             
         </script>
         
         <script type=text/javascript> 

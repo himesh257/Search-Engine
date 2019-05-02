@@ -7,6 +7,12 @@ body{
     color: #808080;
 }
 
+#links{
+    color: #808080;
+    width: 800px;
+    height: 400px;
+}
+
 .material-icons{
     margin-bottom: 70px;
   
