@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" type=text/css>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	    <script src="{{ url_for('static', filename='js/addingResults.js') }}" type=text/javascript></script>
+	    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type=text/css>
+	    
+	    <title> App </title>
+	
+    </head>
+    <body>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search here.." aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" id="pdf" type="button">PDF</button>
+                <button class="btn btn-outline-secondary" id="url" type="button">URL</button>
+                <a href="{{ url_for('bucketLists') }}" id="blPage"><button class="btn btn-outline-secondary" id="bl" type="button"><i class="material-icons" style="font-size:40px">collections_bookmark</i></button></a>
+            </div>
+        </div>
+            {%for i in range(0, c)%}
+            <div class="card">
+                <div class="card-body">
+                    <a id="link" href={{url}} target="_blank"><span>{{ results[i] }}</span></a>
+                </div>
+            </div>
+            
+                <button id=addBtn{{i}} type=button class="btn btn-outline-success">Add</button>
+            
+            {%endfor%}
+        <script>
+            var btns = document.getElementsByClassName('btn btn-outline-success');
+            for(var i = 0; i<btns.length; i+=1)(function(i){
+                $(function(){
+                  $('#addBtn'+i).click(function(e){
+                     
+                      $.getJSON($SCRIPT_ROOT + '/final', {
+                          a: document.getElementById('link').href
+                      }, function(d){
+                        alert(d)
+                      });
+                      return false;
+                  });   
+                })
+             })(i)
+        </script>
+        
+        <script type=text/javascript> 
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
+
+
