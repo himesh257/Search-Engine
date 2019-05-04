@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" type=text/css>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	    <script src="{{ url_for('static', filename='js/addingResults.js') }}" type=text/javascript></script>
 	    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type=text/css>
 	    
 	    <title> App </title>
@@ -18,6 +17,7 @@
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" id="pdf" type="button">PDF</button>
                 <button class="btn btn-outline-secondary" id="url" type="button">URL</button>
+                <a href="{{ url_for('pdfs')}}"><button class="btn btn-outline-secondary" id="pdfs" type="button">Search</button></a>
                 <a href="{{ url_for('bucketLists') }}" id="blPage"><button class="btn btn-outline-secondary" id="bl" type="button"><i class="material-icons" style="font-size:40px">collections_bookmark</i></button></a>
             </div>
         </div>
@@ -33,6 +33,7 @@
             {%endfor%}
         <script>
             var btns = document.getElementsByClassName('btn btn-outline-success');
+            var c = true;
             for(var i = 0; i<btns.length; i+=1)(function(i){
                 $(function(){
                   $('#addBtn'+i).click(function(e){
@@ -48,6 +49,10 @@
              
              $(function(){
                   $('#pdf').click(function(e){
+                      if(c == true){
+                        $(this).css({'background-color':'#28A745', 'color':'white' })
+                      }
+                      c = false
                       $.getJSON($SCRIPT_ROOT + '/pdf', {
                           a: document.getElementById('search').value
                       }, function(d){
@@ -59,6 +64,10 @@
                 
              $(function(){
                   $('#url').click(function(e){
+                      if(c == true){
+                          $(this).css({'background-color':'#28A745', 'color':'white' }) 
+                      }
+                      c = false;
                       $.getJSON($SCRIPT_ROOT + '/url', {
                           a: document.getElementById('search').value
                       }, function(d){
