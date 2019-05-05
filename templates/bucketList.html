@@ -15,13 +15,11 @@
 
 <body>
     {%for i in range(0, c)%}
-            <div class="card">
+            <div class="card" id="cards">
                 <div class="card-body" id="bList">
-                    <a id="links" href={{bl[i]}} target="_blank"><span>{{ bl[i] }}</span></a>
+                    <a id="linkss" href={{bl[i]}} target="_blank"><span>{{ url[i] }}</span></a>
                 </div>
             </div>
-            
-                <button id="addBtn" type=button class="btn btn-outline-success">Add</button>
             
     {%endfor%}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -12,25 +12,32 @@
 	
     </head>
     <body>
+        <p id="blText"><kbd> Bookmarks </kbd></p>
         <div class="input-group">
+            
             <input id="search" type="text" class="form-control" placeholder="Search here.." aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" id="pdf" type="button">PDF</button>
+                
                 <button class="btn btn-outline-secondary" id="url" type="button">URL</button>
-                <a href="{{ url_for('pdfs')}}"><button class="btn btn-outline-secondary" id="pdfs" type="button">Search</button></a>
+                <button class="btn btn-outline-secondary" id="pdf" type="button">PDF</button>
+                <a href="{{ url_for('urls')}}"><button class="btn btn-outline-secondary" id="urls" type="button">SearchURL</button></a>
+                <a href="{{ url_for('pdfs')}}"><button class="btn btn-outline-secondary" id="pdfs" type="button">SearchPDF</button></a>
                 <a href="{{ url_for('bucketLists') }}" id="blPage"><button class="btn btn-outline-secondary" id="bl" type="button"><i class="material-icons" style="font-size:40px">collections_bookmark</i></button></a>
             </div>
         </div>
             {%for i in range(0, c)%}
-            <div class="card">
-                <div class="card-body">
-                    <a id=link{{i}} href={{url[i]}} target="_blank"><span>{{ results[i] }}</span></a>
-                </div>
-            </div>
-            
-                <button id=addBtn{{i}} type=button class="btn btn-outline-success">Add</button>
-            
+                {% if (results[i] != "") and (results != []) %}
+                    <div class="card">
+                        <div class="card-body">
+                            <a id=link{{i}} class="searchRes" href={{url[i]}} target="_blank"><span>{{ results[i] }}</span></a>
+                        </div>
+                    </div>
+                    <button id=addBtn{{i}} type=button class="btn btn-outline-success">Add</button>
+                {% endif %}
             {%endfor%}
+                <footer class="page-footer">
+                    <div> Created By: Himesh Buch on 5/12/2019 </div>
+                </footer>
         <script>
             var btns = document.getElementsByClassName('btn btn-outline-success');
             var c = true;
@@ -48,12 +55,16 @@
              })(i)
              
              $(function(){
-                  $('#pdf').click(function(e){
+                  $('#url').click(function(e){
                       if(c == true){
                         $(this).css({'background-color':'#28A745', 'color':'white' })
+                        $('#pdfs').attr('disabled', true)
+                        $('#pdf').attr('disabled', true)
+                      } else {
+                        $('#pdfs').attr('disabled', false)
                       }
                       c = false
-                      $.getJSON($SCRIPT_ROOT + '/pdf', {
+                      $.getJSON($SCRIPT_ROOT + '/url', {
                           a: document.getElementById('search').value
                       }, function(d){
                         alert(d)
@@ -63,12 +74,16 @@
                 })
                 
              $(function(){
-                  $('#url').click(function(e){
+                  $('#pdf').click(function(e){
                       if(c == true){
-                          $(this).css({'background-color':'#28A745', 'color':'white' }) 
+                          $(this).css({'background-color':'#28A745', 'color':'white' })
+                          $('#urls').attr('disabled', true) 
+                          $('#url').attr('disabled', true)
+                      } else {
+                        $('#urls').attr('disabled', false)
                       }
                       c = false;
-                      $.getJSON($SCRIPT_ROOT + '/url', {
+                      $.getJSON($SCRIPT_ROOT + '/pdf', {
                           a: document.getElementById('search').value
                       }, function(d){
                         alert(d)
