@@ -29,13 +29,13 @@ threads = []
 threadsPdf = []
 
 def data_title():
-    with open('data_titles.txt', 'w') as f:
+    with open('data_titles.txt', 'a') as f:
         print(ind)
         for item in ind:
             f.write("%s\n" % item)
 
 def data_url():
-    with open('data_url.txt', 'w') as f:
+    with open('data_url.txt', 'a') as f:
         for item in bl:
             f.write("%s\n" % item)
 
