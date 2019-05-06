@@ -12,33 +12,48 @@
 	
     </head>
     <body>
+        <div class="pg">
         <p id="blText"><kbd> Bookmarks </kbd></p>
         <div class="input-group">
             
             <input id="search" type="text" class="form-control" placeholder="Search here.." aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                
                 <button class="btn btn-outline-secondary" id="url" type="button">URL</button>
                 <button class="btn btn-outline-secondary" id="pdf" type="button">PDF</button>
                 <a href="{{ url_for('urls')}}"><button class="btn btn-outline-secondary" id="urls" type="button">SearchURL</button></a>
                 <!--button class="btn btn-outline-secondary" id="urls" type="button">SearchURL</button-->
                 <a href="{{ url_for('pdfs')}}"><button class="btn btn-outline-secondary" id="pdfs" type="button">SearchPDF</button></a>
-                <a href="{{ url_for('bucketLists') }}" id="blPage"><button class="btn btn-outline-secondary" id="bl" type="button"><i class="material-icons" style="font-size:40px">collections_bookmark</i></button></a>
+                <a href="{{ url_for('bucketLists') }}" id="blPage"><button class="btn btn-outline-secondary" id="bl" type="button"><i class="material-icons" style="font-size:40px">book</i></button></a>
             </div>
         </div>
             {%for i in range(0, c)%}
                 {% if (results[i] != "") and (results != []) %}
-                    <div class="card">
-                        <div class="card-body">
-                            <a id=link{{i}} class="searchRes" href={{url[i]}} target="_blank"><span>{{ results[i] }}</span></a>
+                        <p>
+                          <div class="card">
+                            <div class="card-body">
+                                <a id=link{{i}} class="searchRes" href={{url[i]}} target="_blank"><span>{{ results[i] }}</span></a>
+                            </div>
+                            </div>
+                            <a class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample{{i}}" aria-expanded="false" aria-controls="collapseExample">
+                                <i class="material-icons">
+                                    horizontal_split
+                                </i>
+                            </a>
+                            <button id=addBtn{{i}} type=button class="btn btn-outline-success">Add</button>
+                          
+                        </p>
+                        <div class="collapse" id="collapseExample{{i}}">
+                          <div class="card card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                          </div>
                         </div>
-                    </div>
-                    <button id=addBtn{{i}} type=button class="btn btn-outline-success">Add</button>
+                    
                 {% endif %}
             {%endfor%}
                 <footer class="page-footer">
                     <div> It's not Google </div>
                 </footer>
+        </div>
         <script>
             var btns = document.getElementsByClassName('btn btn-outline-success');
             var c = true;

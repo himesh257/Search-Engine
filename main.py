@@ -70,8 +70,8 @@ def resPdf(q):
 def mainPage():
     print("im at mainpage")
     a = request.args.get('a')
-    return render_template("main.html", results = [], url = [], c = 0)
-    #return render_template("main.html", results = carss, url = url, c = len(carss))
+    #return render_template("main.html", results = [], url = [], c = 0)
+    return render_template("main.html", results = carss, url = url, c = len(carss))
     
 @app.route('/bucketList', methods=['GET','POST'])
 def bucketLists():
