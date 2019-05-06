@@ -21,6 +21,7 @@
                 <button class="btn btn-outline-secondary" id="url" type="button">URL</button>
                 <button class="btn btn-outline-secondary" id="pdf" type="button">PDF</button>
                 <a href="{{ url_for('urls')}}"><button class="btn btn-outline-secondary" id="urls" type="button">SearchURL</button></a>
+                <!--button class="btn btn-outline-secondary" id="urls" type="button">SearchURL</button-->
                 <a href="{{ url_for('pdfs')}}"><button class="btn btn-outline-secondary" id="pdfs" type="button">SearchPDF</button></a>
                 <a href="{{ url_for('bucketLists') }}" id="blPage"><button class="btn btn-outline-secondary" id="bl" type="button"><i class="material-icons" style="font-size:40px">collections_bookmark</i></button></a>
             </div>
@@ -36,7 +37,7 @@
                 {% endif %}
             {%endfor%}
                 <footer class="page-footer">
-                    <div> Created By: Himesh Buch on 5/12/2019 </div>
+                    <div> It's not Google </div>
                 </footer>
         <script>
             var btns = document.getElementsByClassName('btn btn-outline-success');
