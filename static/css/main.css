@@ -10,6 +10,10 @@ html{
     min-height:100%;
 }
 
+.bookmarks{
+    padding-top: 40px;
+}
+
 .pg{
     margin-bottom:100px;
 }
@@ -38,6 +42,8 @@ footer {
     color: #808080;
     width: 900px;
     height: 400px;
+    margin-bottom: 15px;
+    margin-top: 5px;
 }
 
 #pdfs,#urls{
@@ -104,8 +110,8 @@ footer {
   width: 530px;
   display: inline-block;
   height: 45px;
-  margin-bottom: 0px;
-  margin-top: 0px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   margin-left: 200px;
 }
 

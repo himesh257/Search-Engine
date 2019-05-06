@@ -26,8 +26,8 @@
                 <a href="{{ url_for('bucketLists') }}" id="blPage"><button class="btn btn-outline-secondary" id="bl" type="button"><i class="material-icons" style="font-size:40px">book</i></button></a>
             </div>
         </div>
-            {%for i in range(0, c)%}
-                {% if (results[i] != "") and (results != []) %}
+            {% if details != [] %}
+                {%for i in range(0, c)%}
                         <p>
                           <div class="card">
                             <div class="card-body">
@@ -36,20 +36,37 @@
                             </div>
                             <a class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample{{i}}" aria-expanded="false" aria-controls="collapseExample">
                                 <i class="material-icons">
-                                    horizontal_split
+                                    list
                                 </i>
                             </a>
                             <button id=addBtn{{i}} type=button class="btn btn-outline-success">Add</button>
                           
                         </p>
-                        <div class="collapse" id="collapseExample{{i}}">
-                          <div class="card card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                          </div>
-                        </div>
-                    
-                {% endif %}
-            {%endfor%}
+                        {% if details[i] == "" %}
+                            <div class="collapse" id="collapseExample{{i}}">
+                              <div class="card card-body">
+                                    No description found
+                              </div>
+                            </div>
+                        {% else %}
+                            <div class="collapse" id="collapseExample{{i}}">
+                              <div class="card card-body">
+                                    {{ details[i] }}
+                              </div>
+                            </div>
+                        {% endif %}
+                {%endfor%}
+            {% else %}
+                {%for i in range(0, c)%}
+                    <div class="card">
+                            <div class="card-body">
+                                <a id=link{{i}} class="searchRes" href={{url[i]}} target="_blank"><span>{{ results[i] }}</span></a>
+                            </div>
+                    </div>
+                    <button id=addBtn{{i}} type=button class="btn btn-outline-success">Add</button>
+                {%endfor%}
+            {% endif %}
+            
                 <footer class="page-footer">
                     <div> It's not Google </div>
                 </footer>
