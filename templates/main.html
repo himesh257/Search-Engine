@@ -13,7 +13,10 @@
     </head>
     <body>
         <div class="pg">
-        <p id="blText"><kbd> Bookmarks </kbd></p>
+        <div class="top">
+            <p id="blText"><kbd> Bookmarks </kbd></p>
+            <p id="hsText"><kbd> History </kbd></p>
+        </div>
         <div class="input-group">
             
             <input id="search" type="text" class="form-control" placeholder="Search here.." aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -24,6 +27,7 @@
                 <!--button class="btn btn-outline-secondary" id="urls" type="button">SearchURL</button-->
                 <a href="{{ url_for('pdfs')}}"><button class="btn btn-outline-secondary" id="pdfs" type="button">SearchPDF</button></a>
                 <a href="{{ url_for('bucketLists') }}" id="blPage"><button class="btn btn-outline-secondary" id="bl" type="button"><i class="material-icons" style="font-size:40px">book</i></button></a>
+                <a href="{{ url_for('history') }}" id="blPage"><button class="btn btn-outline-secondary" id="bl" type="button"><i class="material-icons" style="font-size:40px">history</i></button></a>
             </div>
         </div>
             {% if details != [] %}

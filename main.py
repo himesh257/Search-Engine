@@ -6,6 +6,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from threading import Thread
 import random, json
 import requests
+import datetime
 from bs4 import BeautifulSoup
 
 try: 
@@ -16,20 +17,22 @@ except ImportError:
     print("No module named 'google' found") 
 
 app = Flask(__name__)
+now = datetime.datetime.now()
 
 carss = ['honda', 'hundai', 'toyota','o','o']
+date = []
+header = []
+link = []
 bl = []
 results = []
 titles = []
 resultsPdf = []
 titlesPdf = []
 ind = []
-timess = []
 threads = []
 threadsPdf = []
 detailsExtra = []
 details = []
-pTag = []
 
 def data_title():
     with open('data_titles.txt', 'a') as f:
@@ -43,7 +46,7 @@ def data_url():
 
 def res(q):
     query = q
-    for j in search(query, tld="com", num=3, stop=2, pause=3): 
+    for j in search(query, tld="com", num=3, stop=3, pause=3): 
         results.append(j)
         detailss(results[len(results)-1])
         r = requests.get(j).text
@@ -52,31 +55,44 @@ def res(q):
             titles.append(soup.title.string[0:45] + "...")
         else:
             titles.append(soup.title.string)
-    end = time.time()
+    
+    for i in range(0, len(results)):   
+        history1(now.strftime("%Y-%m-%d"), str(now.hour)+":"+str(now.minute), results[i], titles[i])
     return results
     
 def resPdf(q):
     query = q + " pdf"
-    for j in search(query, tld="com", num=3, stop=2, pause=2): 
+    for j in search(query, tld="com", num=3, stop=3, pause=3): 
         if j[-3:] == "pdf":
             resultsPdf.append(j)
             titlesPdf.append(j.split('/')[2])
+            
+    for i in range(0, len(results)):   
+        history1(now.strftime("%Y-%m-%d"), str(now.hour)+":"+str(now.minute), results[i], titles[i])
     return resultsPdf
 
 def detailss(q):
-    soup = BeautifulSoup(requests.get(q).text, 'lxml')
-    for h in soup.find_all(["h1", "h2", "h3", "h4", "h5"]):
-        x = str(h.text.strip())
-        detailsExtra.append(x)
-    y = ' '.join(detailsExtra)
-    if len(y) > 155:
-        d = y[0:150]+"...."
-        details.append(d)
-        detailsExtra.clear()
-    else:
-        details.append(y)
-        detailsExtra.clear()
+    try:
+        soup = BeautifulSoup(requests.get(q).text, 'lxml')
+        for h in soup.find_all(["h1", "h2", "h3", "h4", "h5"]):
+            x = str(h.text.strip())
+            detailsExtra.append(x)
+        y = ' '.join(detailsExtra)
+        if len(y) > 155:
+            d = y[0:150]+"...."
+            details.append(d)
+            detailsExtra.clear()
+        else:
+            details.append(y)
+            detailsExtra.clear()
+    except ConnectionError:
+        details.append("")
 
+def history1(d,t,l,title):
+    with open('history.txt', 'a') as f:
+        x = str(d + "*" + t + "*" + l + "*" + title)
+        f.write("%s\n" % x)
+        
 @app.route('/')
 def mainPage():
     return render_template("main.html", results = [], url = [], c = 0, details = [])
@@ -107,6 +123,11 @@ def addBtn():
 
 @app.route('/url', methods=['GET','POST'])
 def url():
+    details.clear()
+    results.clear()
+    titles.clear()
+    resultsPdf.clear()
+    titlesPdf.clear()
     a = request.args.get('a')
     for i in range(0,1):
         process = Thread(target=res, args=[a])
@@ -124,6 +145,11 @@ def urls():
 
 @app.route('/pdf', methods=['GET','POST'])
 def pdf():
+    details.clear()
+    resultsPdf.clear()
+    titlesPdf.clear()
+    results.clear()
+    titles.clear()
     a = request.args.get('a') 
     for i in range(0,1):
         process = Thread(target=resPdf, args=[a])
@@ -139,5 +165,40 @@ def pdfs():
         process.join()
     return render_template("main.html", results = titlesPdf, url = resultsPdf, details=[], c = len(resultsPdf))
     
+@app.route('/history', methods=['GET','POST'])
+def history():
+    date.clear()
+    link.clear()
+    header.clear()
+    with open('history.txt') as f:
+        num = sum(1 for line in f)
+    with open('history.txt') as f:
+        print("3333333333333333")
+        print(num)
+        x = f.read().splitlines()
+        for i in range(0,num):
+            date.append(str(x[i].split("*")[0]) + " " + str(x[i].split("*")[1]))
+            link.append(x[i].split("*")[2])
+            header.append(x[i].split("*")[3])
+    return render_template("history.html", date = date, title = header, url = link, c = len(header))
+    
 if __name__ == '__main__':
     app.run(debug=True)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
