@@ -173,7 +173,6 @@ def history():
     with open('history.txt') as f:
         num = sum(1 for line in f)
     with open('history.txt') as f:
-        print("3333333333333333")
         print(num)
         x = f.read().splitlines()
         for i in range(0,num):
