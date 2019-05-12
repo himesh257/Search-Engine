@@ -46,13 +46,13 @@ detailsExtra = []
 details = []
 
 
-#reading titles from the database
+#writing titles from the database
 def data_title():
     with open('data_titles.txt', 'a') as f:
         for item in ind:
             f.write("%s\n" % item)
 
-#reading url of different search results from the database
+#writing url of different search results from the database
 def data_url():
     with open('data_url.txt', 'a') as f:
         for item in bl:
@@ -94,8 +94,8 @@ def resPdf(q):
             
     
     #saving history
-    for i in range(0, len(results)):   
-        history1(now.strftime("%Y-%m-%d"), str(now.hour)+":"+str(now.minute), results[i], titles[i])
+    for i in range(0, len(resultsPdf)):   
+        history1(now.strftime("%Y-%m-%d"), str(now.hour)+":"+str(now.minute), resultsPdf[i], titlesPdf[i])
     return resultsPdf
 
 
@@ -133,7 +133,6 @@ def mainPage():
 #bucketList page
 @app.route('/bucketList', methods=['GET','POST'])
 def bucketLists():
-
     #reading from the database
     with open('data_url.txt') as f:
         bl = f.read().splitlines()
@@ -145,6 +144,8 @@ def bucketLists():
 #adding items to bucketList
 @app.route('/final')
 def addBtn():
+    bl.clear()
+    ind.clear()
     a = request.args.get('a')
     bl.append(a)
     data_url()
