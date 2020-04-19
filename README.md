@@ -1,4 +1,4 @@
-# FinalProject
+# Search Engine
 
 
 This is a python based general purpose search engine project. Using python modules, i created a very simple general purpose search engine using google's API. This is (sadly) not a replacement for Google or any other high profile search engine. 
