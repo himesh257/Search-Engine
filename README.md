@@ -7,7 +7,7 @@ Tools:
 1) Python (and python modules)
 2) Flask
 3) AJAX
-4) html, CSS, and Bootstrap
+4) HTML, CSS, and Bootstrap
     
 Features:
 1) Users can search for any search term and 5 search results will be displayed 
@@ -19,16 +19,16 @@ Features:
     
 Limitations:
 1) we only display five search results as web scraping and using google's database to search can be illegal
-2) we could've used Mongodb or SQL or any other database management systems but as this is not being deployed to any domain, graders will have difficulties with saving the data (eg. maybe Mongodb or SQL is not installed in their local machines, even if the website were to be deployed, with database, it is not free and I'm broke!)
+2) we could've used Mongodb or SQL or any other database management systems, but as this is not being deployed to any domain, people might have difficulties with saving the data (eg. maybe Mongodb or SQL is not installed in their local machines, even if the website were to be deployed, with database, it is not free, and the purpose is to make an app without spending a dime)
 3) the search results might take some time to generate, as we are using third-party package to generate them, hence we don't have control over it (PDF searching is relatively faster)
 
 How to run the code?
 1) users do not need to install any packages (given that the code is being run on Linux OS)
 2) to activate virtual environment use this command
-        --(in project directory) . /venv/bin/activate
+        (in project directory) . /venv/bin/activate
 3) after activating the virtual environment run, 
-        --python main.py
-        (this will start the website on localhost)
+        python main.py
+        (go to localhost:5000 to start using the app)
 
 How to use it?
 1) in order to search for a URL, select "URL" option next to the input tab, and click on "SearchURL" button to see the results. 
@@ -36,8 +36,3 @@ How to use it?
 3) clicking on "ADD" button, saves the result in bookmarks (see the screenshot)
 4) clicking on "Bookmarks" icon will show Bookmarks (see the screenshot)
 5) any generated search results are saved in "History" along with the date and time of its search (see the screenshot)
-    
-    
-    
-    
-    
