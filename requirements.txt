@@ -17,7 +17,7 @@ Jinja2==2.10.1
 lxml==4.3.3
 MarkupSafe==1.1.1
 pycparser==2.19
-PyYAML==5.1
+PyYAML==5.4
 requests==2.21.0
 selenium==2.53.6
 six==1.12.0
